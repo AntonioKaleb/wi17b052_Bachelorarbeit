@@ -1,0 +1,10 @@
+Alle Informationen zum DA-Prozess "ÖGK-Beitragskonten" finden Sie in den "PV FAQs".
+
+
+
+
+"<table><tr><td>teeeest</td><td><p style=""text-align: right; margin: 0px 3px 0px 0px; padding: 0; font-size: 8pt; width: 525px; font-style: bold;""><font color =""red"">Rückstand</font> <font color =""green"">Guthaben<font></p></td></tr></table><div class=""legendText""><h2>&nbsp;Hinweise zu fehlerhaften Abrufen von Beitragskonten (BK). </h2> <table style=""white-space:normal !important; font-size: 9pt;"">"+
+"<tr><td style=""padding-right:10px;"">BK-F</td> <td>BK-Vollmacht im WEBEKU nicht gesetzt oder BK-Nummer in BMD-Lohnfirma fehlerhaft hinterlegt. Bitte BK-Vollmacht im WEBEKU setzen oder BK-Nummer in BMD-Lohnfirma prüfen;</td></tr>"+
+"<tr><td>BK-E</td><td>Aktuell kein Dienstnehmer für dieses BK angemeldet;</td></tr>"+
+"<tr><td>Fehler</td><td>Beim Abrufen des BK ist ein Fehler aufgetreten (z.B.: WEBEKU nicht erreichbar, etc.). Bitte Saldo dieses BK manuell prüfen;<br><b><a href=""http://lbg-app3/faq/pv/test.html""> Alle weiteren Informationen finden Sie in den LBG-FAQs</a></b></td></tr>"+
+"</table></div>"

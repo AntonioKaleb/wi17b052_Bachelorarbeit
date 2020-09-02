@@ -1,0 +1,333 @@
+/ ------------------------------------------init----------------------------------------------- //
+
+procedure GenerateTasksBK;forward;                                                                            
+
+procedure GenerateTasksMR;forward;
+
+ 
+
+function GetSQLTextGetAllBK;forward;
+
+function GetSQLTextGetAllMR;forward;
+
+function GetMonatsReportDokId(Jahr, Monat, Sachbearbeiter);forward
+
+procedure GenerateTask(Jahr,Monat,Sachbearbeiter,DokumentId,DescrText,CaptionText);forward;
+
+procedure UpdateTaskGenerated(Jahr,Monat,FirmenNr,BeitragskontoNr);forward;
+
+procedure UpdateSBStatus(Sachbearbeiter); forward;
+
+function GetMonat(Monat);forward;   
+
+ 
+
+// -----------------------------------------level-1--------------------------------------------- //
+
+procedure GenerateTasksBK;       
+
+    begin                       
+
+        {try                                                                             
+
+            Q := MacroObject.CreateMacroQuery('Q');
+
+            Q.SQLText := GetSQLTextGetAllBK;                                               
+
+            Q.Open();                                                              
+
+            while not Q.Eof() do begin                               
+
+                           
+
+                Jahr := Q.GetAsString('Jahr');                                                
+
+                Monat := Q.GetAsString('Monat');                                      
+
+                FirmenNr := Q.GetAsString('FirmenNr');                           
+
+                BeitragskontoNr := Q.GetAsString('BeitragskontoNr');                                        
+
+                Sachbearbeiter := Q.GetAsString('Sachbearbeiter'); 
+
+                BeitragskontoSaldo := Q.GetAsString('BeitragskontoSaldo');  
+
+                DokumentId := Q.GetAsString('DokumentId');
+
+                DescrText := ('Das Saldo des Beitragskontos mit der Nummer "' + BeitragskontoNr +'" beträgt '+BeitragskontoSaldo+'
+
+                Zur Überprüfung der Buchungen finden Sie anbei den detaillierten Beitragskontoauszug.');           
+
+                                                                                                     
+
+                                                                   
+
+                //if BMD_ABS(BeitragskontoSaldo > GetZulDifferenz(FirmenNr)) then begin
+
+                    GenerateTask(Jahr,Monat,FirmenNr,BeitragskontoNr,Sachbearbeiter,BeitragskontoSaldo,DokumentId, DescrText);             
+
+                //end;                                  
+
+                UpdateTaskGenerated(Jahr,Monat,FirmenNr,BeitragskontoNr);   
+
+                                                                                      
+
+                Q.Next();  //Next                                  
+
+            end;                                              
+
+            Q.Close()
+
+        finally
+
+            BMD_SHOWMESSAGE('Finally reached');//DEBUG
+
+        end;}                                                    
+
+    end;                                                                                       
+
+ 
+
+procedure GenerateTasksMR;      
+
+    begin                                              
+
+        Q := MacroObject.CreateMacroQuery('Q');                                                         
+
+        Q.SQLText := GetSQLTextGetAllMR;                              
+
+        Q.Open();                                                               
+
+        while not Q.Eof() do begin                                                                      
+
+            Jahr := Q.GetAsString('Jahr');                         
+
+            Monat := Q.GetAsString('Monat');                                               
+
+            Sachbearbeiter := Q.GetAsString('Sachbearbeiter');                                             
+
+            DokumentId := GetMonatsReportDokId(Jahr,Monat,Sachbearbeiter);
+
+            DescrText :=  'Anbei finden Sie eine Übersicht über die aktuellen Salden der von Ihnen betreuten ÖGK Beitragskonten';
+
+            CaptionText := 'ÖGK-Beitragskonten-Report ' + GetMonat(BMD_MONTH(BMD_DATE()));
+
+                                                                                                                                                 
+
+            GenerateTask(Jahr,Monat,Sachbearbeiter,DokumentId,DescrText,CaptionText)              
+
+                                                                                    
+
+            Q.Next();                                
+
+        end;                                                     
+
+        Q.Close()                     
+
+    end;                             
+
+                             
+
+// -----------------------------------------level-2--------------------------------------------- //                            
+
+function GetSQLTextGetAllBK;                                                    
+
+    begin
+
+    
+
+        {result := 'select * from UiPathData.dbo.P1908_GKKBK ' +
+
+                  'where Jahr = GetDate(Year) and ' + DEBUG LINE - ENTFERNEN?      
+
+                  'Monat = GetDate(Month) and ' +         DEBUG LINE - ENTFERNEN?                                                
+
+                  'TaskGenerated = 0 and ' +                   
+
+                  'order by FirmenNr desc'  }
+
+                                     
+
+         result := 'Select * from UiPathData.dbo.P1908_GKKBK Where DokumentId  = 525700827098465' //DEBUG LINE - ENTFERNEN
+
+    end;                                                                                             
+
+                                                                                               
+
+function GetSQLTextGetAllMR;
+
+    begin                                                 
+
+        result := 'select distinct Jahr, Monat, Sachbearbeiter from UiPathData.dbo.[P1908.SBStatus] ' +      
+
+                  'where Jahr = YEAR(GETDATE()) and ' +                                          
+
+                  'Monat = MONTH(GETDATE()) and ' +                            
+
+                  'Sachbearbeiter LIKE ('+#39'_____'+#39') and ' +
+
+                  'TaskGenerated is null and ' +
+
+                  'ReportGenerate = 1' 
+
+    end;    
+
+                                                                               
+
+function GetMonatsReportDokId(Jahr,Monat,Sachbearbeiter);                                 
+
+    begin                                                                                                                    
+
+        C := MacroObject.CreateMacroQuery('C');                                      
+
+        C.SQLText := 'SELECT DISTINCT FIRST_VALUE(DOK_DOKUMENTENNR) OVER (Order by  DOK_LETZTE_BEARBEITUNG DESC) AS DOK_DOKUMENTENNR ' + 
+
+                     'FROM LBG.BUERO.DOK_DOKUMENT ' +                       
+
+                     'where DOK_ERSTELLUSER = '+#39'DA_WEBEKU'#39+' and ' +
+
+                     'DOK_DOKUMENTNAME like ('+#39+'%\'+#39+'+CAST('+Jahr+' AS varchar)+'+#39+'_'+#39+'+CAST('+Monat+' AS varchar)+'+
+
+                     #39+'_'+#39+'+CAST('+Sachbearbeiter+' AS varchar)+'+#39+'.pdf'+#39+')';
+
+        C.Open();
+
+            DokumentId := C.GetAsString('DOK_DOKUMENTENNR');
+
+        C.Close();                                                           
+
+                                                                                                                                         
+
+        result := DokumentId;
+
+    end;
+
+    
+
+ 
+
+procedure UpdateSBStatus(Sachbearbeiter);
+
+    begin
+
+         C := MacroObject.CreateMacroQuery('C');
+
+         C.SQLText := 'UPDATE UiPathData.dbo.[P1908.SBStatus] SET TaskGenerated = 1 WHERE Sachbearbeiter = '+#39 + Sachbearbeiter + #39+' and ' +
+
+                      'TaskGenerated is null and ' +
+
+                      'ReportGenerate = 1';                    
+
+         C.ExecSQL();          
+
+    end;                                                                                                        
+
+                                                                                                        
+
+                                                                                                            
+
+                                 
+
+procedure GenerateTask(Jahr,Monat,Sachbearbeiter,DokumentId,DescrText,CaptionText);           
+
+    begin                                                                                                                           
+
+        T := CRMMacroObject.CreateTaskMgr('T');
+
+        T.New();                                                                           
+
+            T.SetCaption(CaptionText);                                                                       
+
+            T.SetText(DescrText);                                                                           
+
+            T.SetEmployee(11,'MA2000' + Sachbearbeiter);
+
+            T.SetPerson(11,'MA2000'+ Sachbearbeiter);                                                
+
+        T.Save();                               
+
+        T.AddDocument(T.GetNr(),10,DokumentId);
+
+        UpdateSBStatus(Sachbearbeiter);
+
+                                                                                
+
+    end;                                                                  
+
+                                                                             
+
+procedure UpdateTaskGenerated(Jahr,Monat,FirmenNr,BeitragskontoNr);                                              
+
+    begin                                                                          
+
+        C := MacroObject.CreateMacroQuery('C');
+
+        C.SQLText := 'update UiPathData.dbo.P1908_GKKBK ' + 
+
+                     'set TaskGenerated = 1 ' +                                        
+
+                     'where Jahr = '+Jahr+' and ' +         
+
+                     'Monat = '+Monat+' and ' +           
+
+                     'FirmenNr = '+FirmenNr+' and ' +      
+
+                     'BeitragskontoNr = '+BeitragskontoNr+''
+
+        C.Open();                                           
+
+        C.Close();              
+
+    end;                         
+
+                                            
+
+function GetMonat(Monat);
+
+    begin
+
+        case Monat of                              
+
+            1:  result := 'Dezember';
+
+            2:  result := 'Januar';
+
+            3:  result := 'Februar';
+
+            4:  result := 'März';
+
+            5:  result := 'April';
+
+            6:  result := 'Mai';
+
+            7:  result := 'Juni';                      
+
+            8:  result := 'Juli';
+
+            9:  result := 'August';                                             
+
+            10: result := 'September';
+
+            11: result := 'Oktober';                                                                                     
+
+            12: result := 'November';      
+
+        end                           
+
+    end
+
+                                                                                     
+
+// ------------------------------------------entry---------------------------------------------- // 
+
+begin
+
+    //GenerateTasksBK;
+
+    GenerateTasksMR;
+
+   
+
+    BMD_SHOWMESSAGE('GEN TASK Finished');     
+
+end;                                                  

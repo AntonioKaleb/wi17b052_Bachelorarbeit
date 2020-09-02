@@ -1,0 +1,17 @@
+"select distinct YEAR(getdate()) as Jahr, MONTH(getdate()) as Monat, PER.PER_FIRMENNR as KanzleiNr, INS_FREIFELD1 as Gesellschaft, FGK_FIRMENNR as FirmenNr, FGK_GKKLFDNR as GKKLfdNr, FGK_BEITRAGSKONTONR as BeitragskontoNr, LFI_BEARBKZID as Sachbearbeiter
+from buero.FGK_FIRMENGKKZU FGK
+inner join buero.PER_PERSON as PER on PER_ENTSPRICHT_FIRMENNR = fgk_firmennr 
+inner join hrs.LFI_LOHNFIRMA as LFI on LFI_FIRMENNR = FGK_FIRMENNR and LFI_LOHNJAHR = FGK_FIRMAGUELTIGJAHR
+inner join buero.INS_INSTITUTION as INS on INS_INR = PER_FIRMENNR and INS_IART = 'FM'
+where FGK_FIRMENNR > 10000000 and
+	FGK_FIRMAGUELTIGJAHR = YEAR(getdate()) and
+	PER.PER_PERSONENART = 'KL' and
+	PER.PER_ISTAKTUELLKENNUNG = 1 and 
+	FGK_BEITRAGSKONTONR is not null and 
+	PER_FIRMENNR not in (11, 17) and 
+	LFI_BEARBKZID is not null and
+	isnumeric(FGK_BEITRAGSKONTONR) = 1 and
+	isnumeric(INS_FREIFELD1) = 1 and
+	isnumeric(PER.PER_FIRMENNR) = 1 and
+	isnumeric(FGK_FIRMENNR) = 1 
+order by FGK_FIRMENNR"

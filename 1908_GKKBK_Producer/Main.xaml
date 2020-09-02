@@ -1,0 +1,227 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sds="clr-namespace:System.Data.SqlTypes;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="max" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>994,2857</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="24">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Data.SqlTypes</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="21">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="919,2752" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="877,2660" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence DisplayName="1908_GKKBK_Producer" sap:VirtualizedContainerService.HintSize="839,2433" sap2010:WorkflowViewState.IdRef="Sequence_1">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="ui:DatabaseConnection" Name="conBMD" />
+            <Variable x:TypeArguments="ui:DatabaseConnection" Name="conUiPathData" />
+            <Variable x:TypeArguments="sd:DataTable" Name="dtBK" />
+            <Variable x:TypeArguments="x:Int32" Name="InsertUiPathDataAffectedRows" />
+            <Variable x:TypeArguments="sd:DataTable" Name="BulkQueueOutput" />
+            <Variable x:TypeArguments="sd:DataTable" Name="dtTest" />
+            <Variable x:TypeArguments="x:String" Name="test" />
+            <Variable x:TypeArguments="x:Int32" Name="i" />
+            <Variable x:TypeArguments="sd:DataTable" Name="dtBK2" />
+            <Variable x:TypeArguments="x:Int32" Name="dtBK2AffectedRows" />
+            <Variable x:TypeArguments="x:Boolean" Default="False" Name="DEBUG" />
+            <Variable x:TypeArguments="x:String" Name="variable1" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If Condition="[DEBUG = true]" sap:VirtualizedContainerService.HintSize="797,398" sap2010:WorkflowViewState.IdRef="If_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence DisplayName="LBG-LAB" sap:VirtualizedContainerService.HintSize="376,250" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:DatabaseConnect DatabaseConnection="[conBMD]" DisplayName="Connect LBG-LAB\BMD - LBG" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=LBG-lab\BMD;Initial Catalog=LBG;Integrated Security=True" />
+                <ui:DatabaseConnect DatabaseConnection="[conUiPathData]" DisplayName="Connect LBG-LAB\BMD - UiPathData" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_2" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=lbg-lab\BMD;Initial Catalog=UiPathData;Integrated Security=True" />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence DisplayName="LBG-SQL" sap:VirtualizedContainerService.HintSize="376,250" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:DatabaseConnect DatabaseConnection="[conBMD]" DisplayName="Connect LBG-SQL\BMD - LBG" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_3" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=LBG-sql\BMD;Initial Catalog=LBG;Integrated Security=True" />
+                <ui:DatabaseConnect DatabaseConnection="[conUiPathData]" DisplayName="Connect LBG-SQL\BMD - UiPathData" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_4" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=lbg-sql\BMD;Initial Catalog=UiPathData;Integrated Security=True" />
+              </Sequence>
+            </If.Else>
+          </If>
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtBK]" DisplayName="Execute Query 1908_GetBK" ExistingDbConnection="[conBMD]" sap:VirtualizedContainerService.HintSize="797,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="select distinct &#xA;       YEAR(getdate()) as Jahr, &#xA;       MONTH(getdate()) as Monat, &#xA;       PER.PER_FIRMENNR as KanzleiNr, &#xA;       INS.INS_FREIFELD1 as Gesellschaft, &#xA;       FGK.FGK_FIRMENNR as FirmenNr, &#xA;       FGK.FGK_GKKLFDNR as GKKLfdNr, &#xA;       FGK.FGK_BEITRAGSKONTONR as BeitragskontoNr, &#xA;       (select SB = &#xA;       case&#xA;       when len(BRK.BRK_BEARBKZBEZ) &gt; 1&#xA;       then (select LFI.LFI_BEARBKZID from lbg.hrs.LFI_LOHNFIRMA where LFI_FIRMENNR = FGK_FIRMENNR and LFI_LOHNJAHR = FGK_FIRMAGUELTIGJAHR)&#xA;       else (select RIGHT(PER_PERSONENID,5) from bmd.PAW_PARAMWERT &#xA;             inner join buero.PER_PERSON on PER_FIRMENNR = 11 and PER_PERSONENART = 'MA' and PER_ISTAKTUELLKENNUNG = 1 and PER_PERSONENNR = PAW_PARAMWERT&#xA;             where PAW_PARAMGRUPPE = 'BUERO_KUNDENVERWALTUNG' and &#xA;             PAW_PARAMUNTERGRUPPE = 8 and PAW_PARAMNR = 7 and PAW_FIRMENPAKETNR = PER.PER_FIRMENNR)&#xA;             end) as Sachbearbeiter&#xA;&#xA;from lbg.buero.FGK_FIRMENGKKZU FGK&#xA;inner join lbg.buero.PER_PERSON                as PER on PER_ENTSPRICHT_FIRMENNR = fgk_firmennr &#xA;inner join lbg.hrs.LFI_LOHNFIRMA        as LFI on LFI_FIRMENNR = FGK_FIRMENNR and &#xA;                                                                                   LFI_LOHNJAHR = FGK_FIRMAGUELTIGJAHR&#xA;inner join lbg.hrs.BRK_BEARBEITERKZ            as BRK on BRK_DATENBESTANDNR = LFI.LFI_BRK_DATENBESTANDNR and &#xA;                                                                                   BRK_BEARBKZID = LFI.LFI_BEARBKZID&#xA;inner join lbg.buero.INS_INSTITUTION    as INS on INS_INR = PER_FIRMENNR and &#xA;                                                                                   INS_IART = 'FM'&#xA;inner join lbg.buero.FIR_FIRMA                 as FIR on FIR_FIRMENNR = LFI_FIRMENNR &#xA;where FGK_FIRMENNR &gt; 10000000 and&#xA;            FGK_FIRMAGUELTIGJAHR = YEAR(getdate()) and&#xA;            PER.PER_PERSONENART = 'KL' and&#xA;            PER.PER_ISTAKTUELLKENNUNG = 1 and&#xA;            FGK_BEITRAGSKONTONR is not null and  FGK_BEITRAGSKONTONR != '-' and&#xA;            --PER_FIRMENNR not in (13, 14, 15, 16, 17, 26, 27, 72, 81, 86) and &#xA;            (FIR_ISTTESTFIRMA is null or FIR_ISTTESTFIRMA = 0) and&#xA;            isnumeric(FGK_BEITRAGSKONTONR) = 1 and&#xA;            isnumeric(INS_FREIFELD1) = 1 and&#xA;            isnumeric(PER.PER_FIRMENNR) = 1 and&#xA;            isnumeric(FGK_FIRMENNR) = 1 &#xA;order by Sachbearbeiter&#xA;">
+            <ui:ExecuteQuery.Parameters>
+              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+            </ui:ExecuteQuery.Parameters>
+          </ui:ExecuteQuery>
+          <ui:AddDataColumn x:TypeArguments="sds:SqlMoney" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="True" ColumnName="BeitragskontoSaldo" DataTable="[dtBK]" DisplayName="Add Data Column BeitragskontoSaldo" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+          <ui:AddDataColumn x:TypeArguments="x:String" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="True" ColumnName="ExceptionMessage" DataTable="[dtBK]" DisplayName="Add Data Column ExceptionMessage" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_5" />
+          <ui:AddDataColumn x:TypeArguments="sds:SqlInt64" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="True" ColumnName="DokumentId" DataTable="[dtBK]" DisplayName="Add Data Column DokumentId" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+          <ui:AddDataColumn x:TypeArguments="sds:SqlDateTime" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="True" ColumnName="ProcessingDuration" DataTable="[dtBK]" DisplayName="Add Data Col ProcessDuration" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_6" />
+          <ui:AddDataColumn x:TypeArguments="sds:SqlDateTime" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="False" ColumnName="TimeProcessed" DataTable="[dtBK]" DisplayName="Add Data Column TimeCreated" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_9" />
+          <ui:AddDataColumn x:TypeArguments="sds:SqlDateTime" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="False" ColumnName="TimeCreated" DataTable="[dtBK]" DefaultValue="[datetime.now]" DisplayName="Add Data Column TimeCreated" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_4" />
+          <ui:AddDataColumn x:TypeArguments="sds:SqlInt32" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="False" ColumnName="Sortierung" DataTable="[dtBK]" DefaultValue="[0]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_14" />
+          <ui:InsertDataTable ContinueOnError="{x:Null}" AffectedRecords="[InsertUiPathDataAffectedRows]" DataTable="[dtBK]" DisplayName="Insert" ExistingDbConnection="[conUiPathData]" sap:VirtualizedContainerService.HintSize="797,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_1" TableName="dbo.P1908_GKKBK" />
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtBK2]" DisplayName="Execute Query" ExistingDbConnection="[conUiPathData]" sap:VirtualizedContainerService.HintSize="797,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="Select Distinct [Jahr]&#xA;      ,[Monat]&#xA;      ,[Sachbearbeiter]&#xA;  From [UiPathData].[dbo].[P1908_GKKBK] Where Sachbearbeiter Like ('_____')">
+            <ui:ExecuteQuery.Parameters>
+              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+            </ui:ExecuteQuery.Parameters>
+          </ui:ExecuteQuery>
+          <ui:InsertDataTable ContinueOnError="{x:Null}" AffectedRecords="[dtBK2AffectedRows]" DataTable="[dtBK2]" DisplayName="Insert" ExistingDbConnection="[conUiPathData]" sap:VirtualizedContainerService.HintSize="797,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_2" TableName="UiPathData.dbo.[P1908.SBStatus]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="797,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[InsertUiPathDataAffectedRows &amp; &quot; rows inserted to dbo.P1908_GKKBK --- &quot; &amp; dtBK2AffectedRows &amp; &quot; rows inserted to dbo.P1908.SBStatus&quot;]" />
+          <ui:ForEachRow CurrentIndex="[i]" DataTable="[dtBK]" DisplayName="For Each Row - GenQueueItem" sap:VirtualizedContainerService.HintSize="576,641" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:ForEachRow.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,493" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If Condition="[i &gt;= max and max &lt;&gt; 0]" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If.Then>
+                      <ui:Continue sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Continue_1" />
+                    </If.Then>
+                  </If>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[row(&quot;Gesellschaft&quot;).ToString  &amp; &quot;-&quot; &amp; row(&quot;FirmenNr&quot;).ToString &amp; &quot;-&quot; &amp; row(&quot;BeitragskontoNr&quot;).ToString]" />
+                  <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="1908_GKKBK" Reference="[row(&quot;Gesellschaft&quot;).ToString  &amp; &quot;-&quot; &amp; row(&quot;FirmenNr&quot;).ToString &amp; &quot;-&quot; &amp; row(&quot;BeitragskontoNr&quot;).ToString]">
+                    <ui:AddQueueItem.ItemInformation>
+                      <InArgument x:TypeArguments="x:String" x:Key="Jahr">[row("Jahr").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Monat">[row("Monat").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="KanzleiNr">[row("KanzleiNr").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Gesellschaft">[row("Gesellschaft").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="FirmenNr">[row("FirmenNr").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="GKKLfdNr">[row("GKKLfdNr").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="BeitragskontoNr">[row("BeitragskontoNr").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Sachbearbeiter">[row("Sachbearbeiter").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="TimeCreated">[row("TimeCreated").ToString]</InArgument>
+                    </ui:AddQueueItem.ItemInformation>
+                  </ui:AddQueueItem>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachRow.Body>
+          </ui:ForEachRow>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="797,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Queue Items generated&quot;]" />
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="843,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="454,469" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="418,391" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence sap:VirtualizedContainerService.HintSize="376,299" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:SendMail Bcc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" TimeoutMS="{x:Null}" Body="[exception.Message]" Cc="maximilian.zellner@lbg.at" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="da@lbg.at" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Name="Digitaler Assistent / LBG" Port="112" SecureConnection="Auto" Server="172.18.18.112" Subject="1908_GKKBK_Producer Error" To="it@lbg.at">
+                      <ui:SendMail.Files>
+                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                      </ui:SendMail.Files>
+                    </ui:SendMail>
+                    <Rethrow sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                  </Sequence>
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
